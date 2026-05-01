@@ -1,3 +1,97 @@
 body {
-    background-color: gray;
+    display: flex;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
 }
+#menu {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    background-color: #1a1c23; 
+    
+    /* A sharp highlight on the right edge to separate it from the workspace */
+    border-right: 1px solid #2d313d;
+    
+    /* Soft white text for high readability against dark backgrounds */
+    color: #eceff4;
+
+    /* A subtle shadow that bleeds into the main screen for a layered effect */
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+   
+    
+    
+}
+button {
+    color: white;
+}
+#addTask {
+    margin-top: 17%;
+    width: 100%;
+    align-self: center;
+    color: #eceff4;
+}
+
+button {
+    border: none;
+    background: none;
+
+    /* 3. Reset the internal spacing (optional) */
+    padding: 0;
+
+    /* 4. Fix the font (buttons don't always inherit from the body) */
+    font: inherit;
+    color: inherit;
+
+    /* 5. Essential UX: Show the user they can click it */
+    cursor: pointer;
+
+    /* 6. Remove the blue/orange outline when clicking (Senior Note below!) */
+    outline: none;
+}
+
+#mainScreen {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1e2128; 
+
+    /* Pro-Tip: A very subtle top-down gradient makes the screen feel "lit" from above */
+    background-image: linear-gradient(
+        to bottom, 
+        rgba(255, 255, 255, 0.02) 0%, 
+        transparent 150px
+    );
+
+    /* Ensures any text or secondary elements stay within the color palette */
+    color: #d8dee9;
+}
+
+.title {
+    padding: 50px;
+    color: red;
+}
+
+#formSection {
+    
+    margin: 5%;
+    
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Label takes 1 part, Input takes 2 parts */
+  gap: 20px;
+  max-width: 100%;
+}
+
+#priority {
+    color: black;
+}
+
+#fsubmit {
+   
+    width: 100%;
+}
+

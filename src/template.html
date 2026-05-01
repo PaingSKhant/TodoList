@@ -6,6 +6,46 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="menu">
+        <button id="addTask"><span>+</span> Add Task</button>
+    </div>
+    <div id="mainScreen">
+        <h1>Title</h1>
+        <div id="test">p</div>
+        <div id="modal" style="display: none;">
+            <div id="modalHeader">
+                <h3>New Todo</h4>
+                <button id="closeModal">&times;</button>
+            </div>
+
+            <div id="formSection">
+                <form id="form">
+
+                    <label for="name">Title</label>
+                    <input type="text" id="name" placeholder="Task Title">
+
+                    <label for="description">Description</label>
+                    <input type="text" id="description" placeholder="Task Description">
+
+                    <label for="fDate">Date</label>
+                    <input type="date" id="fDate">
+
+                    <label for="priority">Priority</label>
+                    <select id="priority">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low" selected>Low</option>
+                    </select>
+
+                    <span id="fsubmit"><input id="fsubmit" type="submit"></span>
+                    <div id="test"></div>
+                </form>
+            </div>
+            
+        </div>
+        
+    </div>
+
     
 </body>
 </html>

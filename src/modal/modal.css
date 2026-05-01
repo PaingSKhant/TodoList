@@ -1,0 +1,29 @@
+/*actual Modal Display*/
+#modal {
+    color: white;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    
+    /* That small white border highlight */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    
+    /* Elevation shadow */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+
+    position: fixed; 
+    
+    /* Sit on top of everything else */
+    z-index: 999;
+}
+
+#modalHeader {
+    display: flex;
+    justify-content: space-between;
+    
+}
+#modalHeader h3{
+    margin: 0;
+}
