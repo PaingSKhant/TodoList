@@ -1,7 +1,7 @@
 const modal = document.getElementById("modal");
-const addTask = document.getElementById("addTask");
+const addTask = document.getElementById("addProject");
 const closeBtn = document.getElementById("closeModal")
-export function initModal() {
+/*export function initModal() {
     
     addTask.addEventListener('click', e=> {
         if(modal.style.display == "none"){
@@ -16,5 +16,5 @@ export function initModal() {
             modal.style.display = "none";
         }
     };
-}
+}*/
 

@@ -1,20 +1,13 @@
 import "./style.css";
-import "./modal/modal.css"
+import "./components/modal/modal.css"
+import "./components/RenderTask/renderTask.css"
+import "./components/RenderProject/renderProject.css"
 
-import {initModal} from "./modal/modal.js"
-
-
-const user = { name: "Alex", score: 100 };
-
-const varUser = "KoPaing"
-// Saving
-localStorage.setItem("a", varUser); 
-
-// Retrieving
-const savedUser = localStorage.getItem("a");
+import { createTask } from "./controller.js";
+import { createProject } from "./controller.js";
+import { renderProject } from "./components/RenderProject/renderProject.js";
 
 
+createTask();
 
-
-initModal();
-
+createProject();

@@ -1,0 +1,25 @@
+#tasksContainer {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    flex-grow: 1;
+    border: 2px solid yellow;
+    gap: 5%;
+}
+
+.taskCard {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.top {
+    border: 2px solid purple;
+    display: flex;
+    justify-content: space-between;
+}
+.bottom {
+    border: 2px solid blue;
+    display: flex;
+    justify-content: space-between;
+}

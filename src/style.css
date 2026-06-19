@@ -95,3 +95,23 @@ form {
     width: 100%;
 }
 
+#menu {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#addProject {
+    margin-top: 10%;
+}
+
+#projectsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    flex: 1;
+}
+
+/*______________Project_____________ */
+

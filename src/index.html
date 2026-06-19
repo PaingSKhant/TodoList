@@ -7,11 +7,13 @@
 </head>
 <body>
     <div id="menu">
-        <button id="addTask"><span>+</span> Add Task</button>
+        <button id="addProject"><span>+</span> Add Project</button>
+        <div id="projectsContainer">
+            <div id="defaultProject" class="projectName">Home</div>
+        </div>
     </div>
     <div id="mainScreen">
         <h1>Title</h1>
-        <div id="test">p</div>
         <div id="modal" style="display: none;">
             <div id="modalHeader">
                 <h3>New Todo</h4>
@@ -38,11 +40,13 @@
                     </select>
 
                     <span id="fsubmit"><input id="fsubmit" type="submit"></span>
-                    <div id="test"></div>
+                    
                 </form>
             </div>
             
         </div>
+
+        <div id="tasksContainer"></div>
         
     </div>
 
