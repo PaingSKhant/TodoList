@@ -2,7 +2,7 @@ export function renderTasks(tasksArray) {
     const mainScreen = document.getElementById('mainScreen')
     const tasksContainer = document.getElementById('tasksContainer')
     
-    tasksContainer.innerHTML = '';
+    tasksContainer.innerHTML = ''; //wiped everything
     
     tasksArray.forEach(task => {
         const taskCard = document.createElement('div');

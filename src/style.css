@@ -25,12 +25,6 @@ body {
 button {
     color: white;
 }
-#addTask {
-    margin-top: 17%;
-    width: 100%;
-    align-self: center;
-    color: #eceff4;
-}
 
 button {
     border: none;
@@ -112,6 +106,34 @@ form {
     margin-top: 10px;
     flex: 1;
 }
+/*________Project Title and add Task button________ */
+#titleAndAddTask {
+    border: 2px solid red;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#titleAndAddTask button{
+    color: #a3a3a3;            /* Clean, muted gray */
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, sans-serif; /* Clean modern font stack */
+    
+    padding: 6px 12px;         /* Generous hit-box so it's easy to click */
+    cursor: pointer;
+    user-select: none;         /* Prevents accidental text selection highlighting */
+    
+    transition: color 0.2s ease;
+}
+
+#titleAndAddTask button:hover {
+    color: #ffffff;            /* Lights up crisp white when hovered */
+}
+
+
 
 /*______________Project_____________ */
 

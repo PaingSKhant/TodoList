@@ -1,8 +1,10 @@
-const modal = document.getElementById("modal");
-const addTask = document.getElementById("addProject");
-const closeBtn = document.getElementById("closeModal")
-/*export function initModal() {
+
+export function initModal() {
     
+    const modal = document.getElementById("modal");
+const addTask = document.getElementById("addTask");
+const closeBtn = document.getElementById("closeModal");
+
     addTask.addEventListener('click', e=> {
         if(modal.style.display == "none"){
             modal.style.display = "block";
@@ -16,5 +18,5 @@ const closeBtn = document.getElementById("closeModal")
             modal.style.display = "none";
         }
     };
-}*/
+}
 

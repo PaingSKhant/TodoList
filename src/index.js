@@ -6,8 +6,14 @@ import "./components/RenderProject/renderProject.css"
 import { createTask } from "./controller.js";
 import { createProject } from "./controller.js";
 import { renderProject } from "./components/RenderProject/renderProject.js";
+import { initModal } from "./components/modal/modal.js";
 
+
+createProject();
 
 createTask();
 
-createProject();
+initModal();
+
+renderProject();
+

@@ -2,6 +2,16 @@ import { isToday, isTomorrow, parseISO } from "date-fns";
 
 import { renderTasks } from "./components/RenderTask/renderTask.js";
 
+//all projects are stored here
+export const projects = [
+    {projectName: 'Home', task: ['test1']}
+];
+
+//currently selected project
+let currentProject =  null;
+
+const todoTasks = [];
+
 function todoList(title,dueDate,description,priority) {
     return {
         title,
@@ -11,11 +21,6 @@ function todoList(title,dueDate,description,priority) {
         complete: false
     };
 };
-//all projects are stored here
-const projects = [];
-
-//currently selected project
-let currentProject =  null;
 
 function Project(projectName) {
 
@@ -26,37 +31,56 @@ function Project(projectName) {
 
 };
 
-const todoTasks = [];
+function isNameAvailable(projectName, projectArray) {
+    return !projectArray.some(project => project.projectName === projectName);
+}
 
 export function createProject() {
     const addProject = document.getElementById('addProject');
     const projectsContainer = document.getElementById('projectsContainer');
 
     addProject.addEventListener('click', e=> {
-        const newProject = document.createElement('input'); 
+        console.log('ADD button is clicked!')
+        addProject.disabled = true; //disable the addEventListener
+
+        const newProject = document.createElement('input');
+
 
         newProject.classList.add('projects');
         newProject.type = 'text';
         newProject.placeholder = 'Project Name';
         newProject.maxLength = 19;
-
+        
         projectsContainer.appendChild(newProject);
         console.log('outer event listener');
         newProject.focus();
+
 
         newProject.addEventListener('keyup', e => {
             if (e.key === 'Enter') {
                 // Get the value the user typed (fallback to 'Untitled' if empty)
                 const projectNameValue = newProject.value.trim() || 'Untitled Project';
                 
-               
+                if (!isNameAvailable(projectNameValue, projects)) {
+                    alert('Name is already taken!');
+                    return;
+                }
+
                 const staticProject = document.createElement('div'); //look at this second
                 staticProject.classList.add('projectName');
                 staticProject.textContent = projectNameValue;
                 
+                //create a new project array and push it into projects
+                const createProjectObj = Project(projectNameValue);
+                projects.push(createProjectObj);
+
+                console.log(projects);
+                
                 // Replace the input field with the new static div
                 projectsContainer.replaceChild(staticProject, newProject); 
                 console.log(projectsContainer);
+
+                addProject.disabled = false;
             }
         });
 
