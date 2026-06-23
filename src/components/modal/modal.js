@@ -2,8 +2,8 @@
 export function initModal() {
     
     const modal = document.getElementById("modal");
-const addTask = document.getElementById("addTask");
-const closeBtn = document.getElementById("closeModal");
+    const addTask = document.getElementById("addTask");
+    const closeBtn = document.getElementById("closeModal");
 
     addTask.addEventListener('click', e=> {
         if(modal.style.display == "none"){

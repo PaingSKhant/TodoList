@@ -1,16 +1,18 @@
-import { isToday, isTomorrow, parseISO } from "date-fns";
+import { isToday, isTomorrow, parseISO, format } from "date-fns";
 
 import { renderTasks } from "./components/RenderTask/renderTask.js";
 
+
+
 //all projects are stored here
-export const projects = [
-    {projectName: 'Home', task: ['test1']}
+export let projects = [
+    {projectName: 'Home', task: [{title: 'Wash Dishes',dueDate: Today(),description: "to wash dishes",priority: "Medium" }]}
 ];
 
 //currently selected project
 let currentProject =  null;
 
-const todoTasks = [];
+let todoTasks = [];
 
 function todoList(title,dueDate,description,priority) {
     return {
@@ -30,6 +32,10 @@ function Project(projectName) {
     };
 
 };
+function Today() {
+    const today = new Date();
+    return format(today, "d MMM h:mm b");
+}
 
 function isNameAvailable(projectName, projectArray) {
     return !projectArray.some(project => project.projectName === projectName);
@@ -105,7 +111,8 @@ export function createTask() {
         const descriptionValue = descriptionInput.value;
         const dateValue = dateInput.value;
         const priorityValue = priorityInput.value;
-        
+        console.log(dateValue);
+
         const newTodo = todoList(titleValue, dateValue, descriptionValue, priorityValue);
 
         todoTasks.push(newTodo);
@@ -119,5 +126,3 @@ export function createTask() {
 }
 
 ///test here!!!!!!!!!!!
-
-

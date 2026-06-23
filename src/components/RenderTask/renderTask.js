@@ -1,3 +1,8 @@
+import { format } from "date-fns";
+
+function formattedDate(dueDate) {
+    return format(dueDate, "d MMM h:mm b");
+}
 export function renderTasks(tasksArray) {
     const mainScreen = document.getElementById('mainScreen')
     const tasksContainer = document.getElementById('tasksContainer')
@@ -24,7 +29,7 @@ export function renderTasks(tasksArray) {
 
         const dueDate = document.createElement('div');
         dueDate.classList.add('dueDate');
-        dueDate.textContent = task.dueDate;
+        dueDate.textContent = formattedDate(task.dueDate);
         
         const description = document.createElement('div');
         description.classList.add('description');

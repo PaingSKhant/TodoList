@@ -1,7 +1,12 @@
 import { createProject } from "../../controller.js";
 import { projects } from "../../controller.js";
 import { renderTasks } from "../RenderTask/renderTask.js";
+import { createTask } from "../../controller.js";
 
+function findCurrentTask(currentProjectName) {
+    const foundProject = projects.find(project => project.projectName === currentProjectName);
+    return foundProject ? foundProject.task : [];
+}
 
 export function renderProject() {
     const projectTitle = document.getElementById('projectTitle');
@@ -13,13 +18,12 @@ export function renderProject() {
     let currentTask = null;
 
     projectContainer.addEventListener('click', e => {
-        console.log('projectContainer');
         if(e.target.classList.contains('projectName')) {
             currentProject = e.target.textContent;
-            console.log("currentProject:" + currentProject);
-            currentTask = projects.find(project => project.projectName === currentProject).task;
-            console.log(currentTask);
             projectTitle.textContent = currentProject;
+            console.log("currentProject:" + currentProject);
+            currentTask = findCurrentTask(currentProject);
+            renderTasks(currentTask);
         }
     })
 }
