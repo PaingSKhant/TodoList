@@ -10,9 +10,17 @@ export let projects = [
 ];
 
 //currently selected project
-let currentProject =  null;
+let activeProjectName =  'Home';
 
-let todoTasks = [];
+export function setActiveProject(name) {
+    activeProjectName = name;
+}
+
+export function getActiveProjectTasks() {
+    const foundProject = projects.find(project => project.projectName === activeProjectName);
+    return foundProject ? foundProject.task : [];
+}
+
 
 function todoList(title,dueDate,description,priority) {
     return {
@@ -93,7 +101,7 @@ export function createProject() {
     });
 }
 
-export function createTask() {
+export function createTask(task) {
     const form = document.getElementById('form');
     const testDisplay = document.getElementById('test');
     const titleInput = document.getElementById('name'); 
@@ -107,19 +115,18 @@ export function createTask() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const titleValue = titleInput.value;
-        const descriptionValue = descriptionInput.value;
-        const dateValue = dateInput.value;
-        const priorityValue = priorityInput.value;
-        console.log(dateValue);
+        const currentTasksArray = getActiveProjectTasks();
 
-        const newTodo = todoList(titleValue, dateValue, descriptionValue, priorityValue);
+        const newTodo = todoList(
+            titleInput.value,
+            dateInput.value,
+            descriptionInput.value,
+            priorityInput.value
+        );
+        
+        currentTasksArray.push(newTodo);
 
-        todoTasks.push(newTodo);
-
-        console.log(todoTasks);
-
-        renderTasks(todoTasks);
+        renderTasks(currentTasksArray);
 
         e.target.reset();
     });
