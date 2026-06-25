@@ -108,12 +108,15 @@ form {
 }
 /*________Project Title and add Task button________ */
 #titleAndAddTask {
-    border: 2px solid red;
     width: 100%;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+#projectTitle {
+    margin-left: 2%;
 }
 
 #titleAndAddTask button{

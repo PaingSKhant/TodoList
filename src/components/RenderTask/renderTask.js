@@ -3,6 +3,7 @@ import { format } from "date-fns";
 function formattedDate(dueDate) {
     return format(dueDate, "d MMM h:mm b");
 }
+
 export function renderTasks(tasksArray) {
     const mainScreen = document.getElementById('mainScreen')
     const tasksContainer = document.getElementById('tasksContainer')

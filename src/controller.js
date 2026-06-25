@@ -6,9 +6,19 @@ import { renderTasks } from "./components/RenderTask/renderTask.js";
 
 //all projects are stored here
 export let projects = [
-    {projectName: 'Home', task: [{title: 'Wash Dishes',dueDate: Today(),description: "to wash dishes",priority: "Medium" }]}
+    {projectName: 'Home', task: []}
 ];
+let storage;
 
+export function getLocalStorage() {
+    const saved = localStorage.getItem('storage');
+    return saved ? JSON.parse(saved) : [];
+}
+
+export function setLocalStorage() {
+    storage = projects;
+    localStorage.setItem('storage', JSON.stringify(storage));
+}
 //currently selected project
 let activeProjectName =  'Home';
 
@@ -101,7 +111,8 @@ export function createProject() {
     });
 }
 
-export function createTask(task) {
+export function createTask() {
+    const modal = document.getElementById("modal");
     const form = document.getElementById('form');
     const testDisplay = document.getElementById('test');
     const titleInput = document.getElementById('name'); 
@@ -126,10 +137,17 @@ export function createTask(task) {
         
         currentTasksArray.push(newTodo);
 
+        setLocalStorage();
+        
+        console.log(storage);
+
         renderTasks(currentTasksArray);
 
         e.target.reset();
+
+        modal.style.display = "none";
     });
 }
+
 
 ///test here!!!!!!!!!!!
