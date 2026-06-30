@@ -16,8 +16,13 @@
     position: fixed; 
     
     /* Sit on top of everything else */
-    z-index: 999;
+    top: 20%;
+    
+
+    border: 2px solid #007bff;
 }
+
+
 
 #modalHeader {
     display: flex;
@@ -26,4 +31,10 @@
 }
 #modalHeader h3{
     margin: 0;
+}
+
+span#fsubmit {
+    grid-column: 2;
+    
+    justify-self: end;
 }

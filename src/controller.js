@@ -1,13 +1,10 @@
 import { isToday, isTomorrow, parseISO, format } from "date-fns";
 
 import { renderTasks } from "./components/RenderTask/renderTask.js";
-
+import { displaySavedProjects } from "./components/RenderProject/renderProject.js";
 
 
 //all projects are stored here
-export let projects = [
-    {projectName: 'Home', task: []}
-];
 let storage;
 
 export function getLocalStorage() {
@@ -19,6 +16,31 @@ export function setLocalStorage() {
     storage = projects;
     localStorage.setItem('storage', JSON.stringify(storage));
 }
+
+const savedData = getLocalStorage();
+
+
+export let projects =[
+    {projectName: 'Home', task: []}
+];
+
+function loadSavedData() {
+    const saved = localStorage.getItem('storage');
+    if (saved) {
+        const parsed = JSON.parse(saved);
+        
+        // Double check that it's actually a valid array before touching it
+        if (Array.isArray(parsed) && parsed.length > 0) {
+            // Wipe the default 'Home' project out first
+            projects.length = 0; 
+            
+            // Push the saved items into the existing projects array
+            projects.push(...parsed); 
+        }
+    }
+}
+
+loadSavedData();
 //currently selected project
 let activeProjectName =  'Home';
 
@@ -50,14 +72,24 @@ function Project(projectName) {
     };
 
 };
-function Today() {
-    const today = new Date();
-    return format(today, "d MMM h:mm b");
-}
 
 function isNameAvailable(projectName, projectArray) {
     return !projectArray.some(project => project.projectName === projectName);
 }
+
+export function updateProjectName() {
+    const updateProjectName = projects.map(user => {
+        if(user.projectName === "Home") {
+            return {...user, projectName: "changeHome"};
+        }
+        return user;
+    });
+    projects = updateProjectName;
+
+    setLocalStorage();
+}
+
+updateProjectName();
 
 export function createProject() {
     const addProject = document.getElementById('addProject');
@@ -98,10 +130,11 @@ export function createProject() {
                 const createProjectObj = Project(projectNameValue);
                 projects.push(createProjectObj);
 
+                setLocalStorage();
                 console.log(projects);
                 
                 // Replace the input field with the new static div
-                projectsContainer.replaceChild(staticProject, newProject); 
+                displaySavedProjects(); 
                 console.log(projectsContainer);
 
                 addProject.disabled = false;
