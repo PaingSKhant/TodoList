@@ -38,3 +38,35 @@ span#fsubmit {
     
     justify-self: end;
 }
+
+/* Base styling for the edit button */
+/* Base styling for your edit button */
+.editBtn {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    
+    /* Alignment & Spacing */
+    padding: 8px 12px;
+    margin-right: 12px; /* Keeps it clean from the right border */
+    border-radius: 4px; /* Softens the hover box edges */
+    
+    /* Matches the subtle, muted look of your project names by default */
+    color: rgba(255, 255, 255, 0.6); 
+    
+    /* Smooth transition for the hover effects */
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* 1. When the project row is hovered, light up the button to match the text color */
+.project-row-wrapper:hover .editBtn {
+    color: #ffffff;
+}
+
+/* 2. When directly hovering the button, apply the exact same gray hover tint */
+.editBtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff; /* Ensures it stays bright white */
+}

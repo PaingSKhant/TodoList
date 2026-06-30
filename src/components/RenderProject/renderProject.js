@@ -32,15 +32,19 @@ export function displaySavedProjects() {
     projectContainer.innerHTML = '';
 
     projects.forEach(project => {
-
+        const projectNameContainer = document.createElement('div');
+        projectNameContainer.classList.add('project-row-wrapper');
         const staticProject = document.createElement('div');
         staticProject.classList.add('projectName');
         staticProject.textContent = project.projectName;
 
-        projectContainer.appendChild(staticProject);
 
         const editBtn = editButton();
 
-        projectContainer.appendChild(editBtn);
+
+        projectNameContainer.appendChild(staticProject);
+        projectNameContainer.appendChild(editBtn);
+        projectContainer.appendChild(projectNameContainer);
+
     })
 }

@@ -1,51 +1,113 @@
-.projects {
-    display: block;
+/* ==========================================================================
+   1. Dynamic Row Wrapper Layout & Actions
+   ========================================================================== */
+
+/* The outer buffer container handles the row's shape, alignment, and core hover triggers */
+.project-row-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    padding: 12px 20px;
     box-sizing: border-box;
+    background: transparent;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-left 0.15s ease;
+}
 
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-
-    color: #ffffff;
-
-    background-color: rgba(255, 255, 255, 0.08);
-
-    
+/* Unified Row Hover State: Both text and icon backgrounds light up together smoothly */
+.project-row-wrapper:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
     border-left: 3px solid #007bff;
-
-    outline: none;
 }
 
-#projectsContainer * {
-    border: 2px solid red;
-}
+/* ==========================================================================
+   2. Project Name Adjustments (Inside Wrapper)
+   ========================================================================== */
 
+/* Your original .projectName styles remain intact for static items, 
+   but we neutralize padding/borders when nested inside our flex row to avoid layout breaking */
 .projectName {
     display: block;
     width: 100%;
     padding: 12px 20px;
     box-sizing: border-box;
-
-    color: rgba(255,255,255,0.8);
-
+    color: rgba(255, 255, 255, 0.8);
     background: transparent;
-
     border-left: 3px solid transparent;
+    transition: color 0.15s ease;
 }
-/* Hover State: More distinct lift */
+
+/* Standalone / Static HTML Hover (Like your "Home" element) */
 .projectName:hover {
     background-color: rgba(255, 255, 255, 0.1); 
     color: #ffffff;
     border-left: 3px solid #007bff;
 }
 
+/* Specific override when .projectName is inside our new dynamic buffer row */
+.project-row-wrapper .projectName {
+    flex-grow: 1;
+    border-left: none !important; /* Managed by parent row wrapper */
+    background: transparent !important; /* Managed by parent row wrapper */
+    padding-right: 8px; /* Roomy separation before the button starts */
+}
 
-
-/* Active Input State: Brightest background so you know where you're typing */
-.projects {
-    background-color: rgba(255, 255, 255, 0.08);
+/* Lights up text color uniformly when the wrapper row is hovered */
+.project-row-wrapper:hover .projectName {
     color: #ffffff;
+}
+
+/* ==========================================================================
+   3. Edit Button Integration
+   ========================================================================== */
+
+.editBtn {
+    background: transparent;
+    border: none;
     outline: none;
+    cursor: pointer;
+    
+    /* Box padding and spacing alignment inside the flex row */
+    padding: 6px 10px;
+    margin-right: 12px; 
+    border-radius: 4px; /* Softens box edges for a neat clickable region */
+    
+    font-size: 0.85rem;  /* Shrinks the icon/text size */
+    padding: 4px 8px;     /* Reduces the clickable box padding */
+    margin-right: 12px;
+
+    /* Slightly dimmer color initially so it doesn't pull focus from the text label */
+    color: rgba(255, 255, 255, 0.4); 
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Matches the button color to text when the container is hovered */
+.project-row-wrapper:hover .editBtn {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Micro-interaction: Brightens fully and gains its own distinct gray block inside the row */
+.editBtn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   4. Input Textboxes (.projects)
+   ========================================================================== */
+
+/* Kept exactly your active input rules */
+.projects {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: none;
     border-left: 3px solid #007bff;
+    outline: none;
 }
