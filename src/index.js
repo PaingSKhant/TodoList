@@ -5,7 +5,7 @@ import "./components/RenderProject/renderProject.css"
 
 import { createTask,createProject, updateData } from "./controller.js";
 import { displaySavedProjects, initProjectListeners, renderProject } from "./components/RenderProject/renderProject.js";
-import { initModal } from "./components/modal/modal.js";
+import { editModal, initModal } from "./components/modal/modal.js";
 import { getActiveProjectTasks } from "./controller.js";
 import { format, isToday, isTomorrow } from "date-fns";
 import { getLocalStorage, setLocalStorage } from "./controller.js";
@@ -22,6 +22,8 @@ renderTasks(getActiveProjectTasks());
 initProjectListeners();
 
 initModal();
+
+
 
 
 function filterToday() {

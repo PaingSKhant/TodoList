@@ -28,6 +28,7 @@
 /* Your original .projectName styles remain intact for static items, 
    but we neutralize padding/borders when nested inside our flex row to avoid layout breaking */
 .projectName {
+    flex-shrink: 1;
     display: block;
     width: 100%;
     padding: 12px 20px;
@@ -38,14 +39,14 @@
     transition: color 0.15s ease;
 }
 
-/* Standalone / Static HTML Hover (Like your "Home" element) */
+
 .projectName:hover {
     background-color: rgba(255, 255, 255, 0.1); 
     color: #ffffff;
     border-left: 3px solid #007bff;
 }
 
-/* Specific override when .projectName is inside our new dynamic buffer row */
+
 .project-row-wrapper .projectName {
     flex-grow: 1;
     border-left: none !important; /* Managed by parent row wrapper */
@@ -58,46 +59,13 @@
     color: #ffffff;
 }
 
-/* ==========================================================================
-   3. Edit Button Integration
-   ========================================================================== */
 
-.editBtn {
-    background: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    
-    /* Box padding and spacing alignment inside the flex row */
-    padding: 6px 10px;
-    margin-right: 12px; 
-    border-radius: 4px; /* Softens box edges for a neat clickable region */
-    
-    font-size: 0.85rem;  /* Shrinks the icon/text size */
-    padding: 4px 8px;     /* Reduces the clickable box padding */
-    margin-right: 12px;
-
-    /* Slightly dimmer color initially so it doesn't pull focus from the text label */
-    color: rgba(255, 255, 255, 0.4); 
-    transition: background-color 0.15s ease, color 0.15s ease;
-}
 
 /* Matches the button color to text when the container is hovered */
-.project-row-wrapper:hover .editBtn {
+.project-row-wrapper:hover{
     color: rgba(255, 255, 255, 0.8);
 }
 
-/* Micro-interaction: Brightens fully and gains its own distinct gray block inside the row */
-.editBtn:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: #ffffff !important;
-}
-
-/* ==========================================================================
-   4. Input Textboxes (.projects)
-   ========================================================================== */
-
-/* Kept exactly your active input rules */
 .projects {
     display: block;
     width: 100%;
@@ -110,4 +78,60 @@
     border: none;
     border-left: 3px solid #007bff;
     outline: none;
+}
+
+.btnContainer {
+    display: flex;
+    align-items: center;
+    gap: 4px;            /* Adds a small, neat space between the edit and delete buttons */
+    flex-shrink: 0;      /* CRITICAL: Prevents the button area from shrinking or overflowing */
+}
+
+.editBtn {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    
+    /* Box padding and spacing alignment inside the flex row */
+    padding: 4px 8px;    /* Kept your smaller sizing */
+    border-radius: 4px;  /* Softens box edges for a neat clickable region */
+    font-size: 0.85rem;  /* Shrinks the icon/text size */
+    
+    /* Slightly dimmer color initially so it doesn't pull focus from the text label */
+    color: rgba(255, 255, 255, 0.4); 
+    transition: background-color 0.15s ease, color 0.15s ease;
+    
+    display: flex;       /* Ensures icon centers perfectly inside the clickable box */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Apply the same style rules to your delete button if it uses a class like .deleteBtn */
+.deleteBtn {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4); 
+    transition: background-color 0.15s ease, color 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Matches the button colors to text when the container row is hovered */
+.project-row-wrapper:hover .editBtn,
+.project-row-wrapper:hover .deleteBtn {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Micro-interactions: Brightens fully on direct hover */
+.editBtn:hover,
+.deleteBtn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff !important;
 }

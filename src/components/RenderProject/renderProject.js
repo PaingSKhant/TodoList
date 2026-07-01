@@ -1,8 +1,7 @@
 import { projects, setActiveProject, getActiveProjectTasks } from "../../controller.js";
 import { renderTasks } from "../RenderTask/renderTask.js";
 import { getLocalStorage } from "../../controller.js";
-import { editButton } from "../modal/modal.js";
-
+import { editButton, editModal, deleteButton } from "../modal/modal.js";
 
 export function initProjectListeners() {
     let storage = getLocalStorage();
@@ -13,8 +12,6 @@ export function initProjectListeners() {
         if (e.target.classList.contains('projectName')) {
             const clickedProjectName = e.target.textContent;
             
-            // Update the source of truth inside the controller
-            
             setActiveProject(clickedProjectName);
             
             // Update the UI Header text
@@ -23,6 +20,18 @@ export function initProjectListeners() {
             // Get the updated tasks array and render it
             const currentTasks = getActiveProjectTasks();
             renderTasks(currentTasks);
+        }
+
+
+        if (e.target.closest('.editBtn')) {
+            const parentRow = e.target.closest('.project-row-wrapper'); 
+    
+            // Search DOWN inside that specific row for the project name element
+            const projectNameElement = parentRow.querySelector('.projectName');
+    
+            // Extract the text string
+            const associatedProjectName = projectNameElement.textContent;
+            editModal(associatedProjectName);
         }
     });
 }
@@ -34,16 +43,23 @@ export function displaySavedProjects() {
     projects.forEach(project => {
         const projectNameContainer = document.createElement('div');
         projectNameContainer.classList.add('project-row-wrapper');
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('btnContainer');
+
         const staticProject = document.createElement('div');
         staticProject.classList.add('projectName');
         staticProject.textContent = project.projectName;
 
 
         const editBtn = editButton();
+        const deleteBtn = deleteButton();
 
 
         projectNameContainer.appendChild(staticProject);
-        projectNameContainer.appendChild(editBtn);
+        buttonContainer.appendChild(editBtn);
+        buttonContainer.appendChild(deleteBtn);
+        projectNameContainer.appendChild(buttonContainer);
         projectContainer.appendChild(projectNameContainer);
 
     })
