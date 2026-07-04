@@ -70,17 +70,22 @@ export function editModal(pjectName) {
     closeBtn.innerHTML = '&times;';
 
     const editInput = document.createElement('input');
-    
+    editInput.classList.add('editInput');
+
+    const editSubmit = document.createElement('button');
+    editSubmit.type = 'submit';
+    editSubmit.innerText = 'Submit';
 
     closeBtn.addEventListener('click', () => {
         editWindow.close();
         editWindow.remove();
     });
 
-
     titleAndBtn.appendChild(projectName);
     titleAndBtn.appendChild(closeBtn);
     editWindow.appendChild(titleAndBtn);
+    editWindow.appendChild(editInput);
+    editWindow.appendChild(editSubmit);
     mainScreen.appendChild(editWindow);
 
     editWindow.showModal();

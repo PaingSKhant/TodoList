@@ -60,7 +60,17 @@ span#fsubmit {
 #titleAndClose {
     display: flex;
     justify-content: space-between;
-    flex: 1;
-    
     margin-top: -8%;
+    
+}
+
+.editInput {
+    border: 2px solid blue;
+    height: 18px;
+}
+
+.editModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
