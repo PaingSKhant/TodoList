@@ -1,3 +1,5 @@
+import { changeProjectName } from "../../controller.js";
+import { displaySavedProjects } from "../RenderProject/renderProject.js";
 
 export function initModal() {
     
@@ -53,6 +55,7 @@ export function deleteButton() {
     
 }
 
+
 export function editModal(pjectName) {
 
     const mainScreen = document.getElementById('mainScreen');
@@ -71,21 +74,39 @@ export function editModal(pjectName) {
 
     const editInput = document.createElement('input');
     editInput.classList.add('editInput');
+    editInput.placeholder = "New Project name";
 
-    const editSubmit = document.createElement('button');
-    editSubmit.type = 'submit';
-    editSubmit.innerText = 'Submit';
+    editWindow.addEventListener('close', e => {
+        editWindow.remove();
+    });
 
     closeBtn.addEventListener('click', () => {
         editWindow.close();
-        editWindow.remove();
+    });
+
+    editInput.addEventListener('keydown', e=> {
+        if(e.key === "Enter") {
+
+            let editProjectName = editInput.value;
+            
+            if(editProjectName.length < 1) {
+                alert("Project Name must be over 1 character");
+                return;
+            }
+
+            console.log(editProjectName);
+
+            changeProjectName(pjectName,editProjectName);
+            displaySavedProjects();
+
+            editWindow.close();
+        }
     });
 
     titleAndBtn.appendChild(projectName);
     titleAndBtn.appendChild(closeBtn);
     editWindow.appendChild(titleAndBtn);
     editWindow.appendChild(editInput);
-    editWindow.appendChild(editSubmit);
     mainScreen.appendChild(editWindow);
 
     editWindow.showModal();

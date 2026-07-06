@@ -53,6 +53,16 @@ export function getActiveProjectTasks() {
     return foundProject ? foundProject.task : [];
 }
 
+export function changeProjectName(currentProject, newProjectName) {
+    for (let project of projects) {
+        if(project.projectName === currentProject) {
+            project.projectName = newProjectName;
+            setLocalStorage();
+            break;
+        }
+    }
+}
+
 
 function todoList(title,dueDate,description,priority) {
     return {
@@ -77,19 +87,6 @@ function isNameAvailable(projectName, projectArray) {
     return !projectArray.some(project => project.projectName === projectName);
 }
 
-export function updateProjectName() {
-    const updateProjectName = projects.map(user => {
-        if(user.projectName === "Home") {
-            return {...user, projectName: "changeHome"};
-        }
-        return user;
-    });
-    projects = updateProjectName;
-
-    setLocalStorage();
-}
-
-updateProjectName();
 
 export function createProject() {
     const addProject = document.getElementById('addProject');
