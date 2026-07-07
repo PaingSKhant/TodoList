@@ -38,7 +38,7 @@ span#fsubmit {
     
     justify-self: end;
 }
-.editModal {
+.editModal, .deleteModal {
     background-color: #1e1e24; /* Matches your sidebar theme */
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -49,7 +49,7 @@ span#fsubmit {
 }
 
 /* Style the native dimming backdrop layer */
-.editModal::backdrop {
+.editModal::backdrop, .deleteModal::backdrop {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
@@ -70,8 +70,22 @@ span#fsubmit {
     height: 18px;
 }
 
-.editModal {
+.editModal, .deleteModal {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-row-wrapper {
+    border: 2px solid red;
+}
+
+.deleteTitle {
+    text-align: center;
+    margin-top: -8%;
+}
+
+.yesOrNo {
+    display: flex;
     justify-content: space-between;
 }

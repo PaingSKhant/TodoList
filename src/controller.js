@@ -182,7 +182,7 @@ export function createTask() {
 
 export function updateProjectName(pjectName) {
 
-    const {editInput, editWindow} = editModalWindow(pjectName,"New Project name");
+    const {editInput, editWindow} = editModalWindow(pjectName,"Edit Project name");
 
     editInput.addEventListener('keydown', e=> {
         if(e.key === "Enter") {

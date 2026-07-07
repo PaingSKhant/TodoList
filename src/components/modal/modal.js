@@ -96,3 +96,37 @@ export function editModalWindow(currentSelectedName, placeholderText) {
     };
 }
 
+export function deleteModalWindow(currentSelectedName) {
+    const mainScreen = document.getElementById('mainScreen');
+    const deleteWindow = document.createElement('dialog');
+    deleteWindow.classList.add('deleteModal');
+
+    const title = document.createElement('h4');
+    title.classList.add('deleteTitle');
+    title.textContent = currentSelectedName;
+
+    const yesOrNo = document.createElement('div');
+    yesOrNo.classList.add('yesOrNo');
+
+    const yes = document.createElement('button');
+    yes.textContent = "Yes";
+
+    const no = document.createElement('button');
+    no.textContent = "No";
+
+    deleteWindow.addEventListener('close', e => {
+        deleteWindow.remove();
+    });
+
+    no.addEventListener('click', e => {
+        deleteWindow.close();
+    });
+
+    yesOrNo.appendChild(yes);
+    yesOrNo.appendChild(no);
+    deleteWindow.appendChild(title);
+    deleteWindow.appendChild(yesOrNo);
+    mainScreen.appendChild(deleteWindow);
+
+    deleteWindow.showModal();
+}
