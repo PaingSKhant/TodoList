@@ -1,7 +1,7 @@
-import { projects, setActiveProject, getActiveProjectTasks } from "../../controller.js";
+import { projects, setActiveProject, getActiveProjectTasks, updateProjectName } from "../../controller.js";
 import { renderTasks } from "../RenderTask/renderTask.js";
 import { getLocalStorage } from "../../controller.js";
-import { editButton, editModal, deleteButton } from "../modal/modal.js";
+import { editButton, deleteButton } from "../modal/modal.js";
 
 export function initProjectListeners() {
     let storage = getLocalStorage();
@@ -31,7 +31,7 @@ export function initProjectListeners() {
     
             // Extract the text string
             const associatedProjectName = projectNameElement.textContent;
-            editModal(associatedProjectName);
+            updateProjectName(associatedProjectName);
         }
     });
 }

@@ -2,6 +2,7 @@ import { isToday, isTomorrow, parseISO, format } from "date-fns";
 
 import { renderTasks } from "./components/RenderTask/renderTask.js";
 import { displaySavedProjects } from "./components/RenderProject/renderProject.js";
+import { editModalWindow } from "./components/modal/modal.js";
 
 
 //all projects are stored here
@@ -179,5 +180,33 @@ export function createTask() {
     });
 }
 
+export function updateProjectName(pjectName) {
+
+    const {editInput, editWindow} = editModalWindow(pjectName,"New Project name");
+
+    editInput.addEventListener('keydown', e=> {
+        if(e.key === "Enter") {
+
+            let editProjectName = editInput.value;
+            
+            if(editProjectName.length < 1) {
+                alert("Project Name must be over 1 character");
+                return;
+            }
+
+            console.log(editProjectName);
+
+            changeProjectName(pjectName,editProjectName);
+            displaySavedProjects();
+
+            editWindow.close();
+        }
+    });
+
+    
+
+    console.log('clicked: Edit');
+
+}
 
 ///test here!!!!!!!!!!!

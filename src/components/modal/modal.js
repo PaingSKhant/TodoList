@@ -1,5 +1,4 @@
 import { changeProjectName } from "../../controller.js";
-import { displaySavedProjects } from "../RenderProject/renderProject.js";
 
 export function initModal() {
     
@@ -56,8 +55,7 @@ export function deleteButton() {
 }
 
 
-export function editModal(pjectName) {
-
+export function editModalWindow(currentSelectedName, placeholderText) {
     const mainScreen = document.getElementById('mainScreen');
     const editWindow = document.createElement('dialog');
     editWindow.classList.add('editModal');
@@ -65,8 +63,8 @@ export function editModal(pjectName) {
     const titleAndBtn = document.createElement('div');
     titleAndBtn.id = 'titleAndClose';
 
-    const projectName = document.createElement('h4');
-    projectName.textContent = pjectName;
+    const titleName = document.createElement('h4');
+    titleName.textContent = currentSelectedName;
 
     const closeBtn = document.createElement('button');
     closeBtn.id = 'closeBtn';
@@ -74,7 +72,7 @@ export function editModal(pjectName) {
 
     const editInput = document.createElement('input');
     editInput.classList.add('editInput');
-    editInput.placeholder = "New Project name";
+    editInput.placeholder = placeholderText;
 
     editWindow.addEventListener('close', e => {
         editWindow.remove();
@@ -84,26 +82,7 @@ export function editModal(pjectName) {
         editWindow.close();
     });
 
-    editInput.addEventListener('keydown', e=> {
-        if(e.key === "Enter") {
-
-            let editProjectName = editInput.value;
-            
-            if(editProjectName.length < 1) {
-                alert("Project Name must be over 1 character");
-                return;
-            }
-
-            console.log(editProjectName);
-
-            changeProjectName(pjectName,editProjectName);
-            displaySavedProjects();
-
-            editWindow.close();
-        }
-    });
-
-    titleAndBtn.appendChild(projectName);
+    titleAndBtn.appendChild(titleName);
     titleAndBtn.appendChild(closeBtn);
     editWindow.appendChild(titleAndBtn);
     editWindow.appendChild(editInput);
@@ -111,6 +90,9 @@ export function editModal(pjectName) {
 
     editWindow.showModal();
 
-    console.log('clicked: Edit');
-
+    return {
+        editInput,
+        editWindow
+    };
 }
+
