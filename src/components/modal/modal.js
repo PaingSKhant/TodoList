@@ -74,7 +74,7 @@ export function editModalWindow(currentSelectedName, placeholderText) {
     editInput.classList.add('editInput');
     editInput.placeholder = placeholderText;
 
-    editWindow.addEventListener('close', e => {
+    editWindow.addEventListener('close', () => {
         editWindow.remove();
     });
 
@@ -129,4 +129,6 @@ export function deleteModalWindow(currentSelectedName) {
     mainScreen.appendChild(deleteWindow);
 
     deleteWindow.showModal();
+
+    return {yes, deleteWindow};
 }

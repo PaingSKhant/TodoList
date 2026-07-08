@@ -11,7 +11,6 @@ import { format, isToday, isTomorrow } from "date-fns";
 import { getLocalStorage, setLocalStorage } from "./controller.js";
 import { renderTasks } from "./components/RenderTask/renderTask.js";
 
-
 createProject();
 
 createTask();

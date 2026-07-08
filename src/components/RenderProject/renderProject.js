@@ -1,4 +1,4 @@
-import { projects, setActiveProject, getActiveProjectTasks, updateProjectName } from "../../controller.js";
+import { projects, setActiveProject, getActiveProjectTasks, updateProjectName, deleteProject } from "../../controller.js";
 import { renderTasks } from "../RenderTask/renderTask.js";
 import { getLocalStorage } from "../../controller.js";
 import { editButton, deleteButton, deleteModalWindow } from "../modal/modal.js";
@@ -43,7 +43,7 @@ export function initProjectListeners() {
 
             const projectName = projectNameElement.textContent;
 
-            deleteModalWindow(`Delete ${projectName}?`);
+            deleteProject(projectName);
         }
     });
 }

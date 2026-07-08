@@ -2,7 +2,7 @@ import { isToday, isTomorrow, parseISO, format } from "date-fns";
 
 import { renderTasks } from "./components/RenderTask/renderTask.js";
 import { displaySavedProjects } from "./components/RenderProject/renderProject.js";
-import { editModalWindow } from "./components/modal/modal.js";
+import { deleteModalWindow, editModalWindow } from "./components/modal/modal.js";
 
 
 //all projects are stored here
@@ -42,7 +42,7 @@ function loadSavedData() {
 }
 
 loadSavedData();
-//currently selected project
+
 let activeProjectName =  'Home';
 
 export function setActiveProject(name) {
@@ -62,6 +62,11 @@ export function changeProjectName(currentProject, newProjectName) {
             break;
         }
     }
+}
+
+export function projectDeletion(projectName) {
+    projects = projects.filter(project => project.projectName !== projectName);
+    setLocalStorage();
 }
 
 
@@ -194,19 +199,37 @@ export function updateProjectName(pjectName) {
                 return;
             }
 
-            console.log(editProjectName);
+            if(!isNameAvailable(editProjectName,projects)) {
+                alert("Name is already taken!")
+            }
+            
+            else {
+                changeProjectName(pjectName,editProjectName);
+                displaySavedProjects();
 
-            changeProjectName(pjectName,editProjectName);
-            displaySavedProjects();
+                console.log(projects);
+                console.log(getLocalStorage());
 
-            editWindow.close();
+                editWindow.close();
+            }
+            
         }
     });
+}
 
-    
+export function deleteProject(projectName) {
+    const {yes, deleteWindow} = deleteModalWindow(projectName);
 
-    console.log('clicked: Edit');
+    yes.addEventListener('click', () => {
 
+        projectDeletion(projectName);
+        displaySavedProjects();
+        console.log(projects);
+        console.log(getLocalStorage());
+
+        deleteWindow.close();
+
+    });
 }
 
 ///test here!!!!!!!!!!!
