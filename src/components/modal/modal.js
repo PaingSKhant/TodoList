@@ -103,7 +103,7 @@ export function deleteModalWindow(currentSelectedName) {
 
     const title = document.createElement('h4');
     title.classList.add('deleteTitle');
-    title.textContent = currentSelectedName;
+    title.textContent = "Delete Project?";
 
     const yesOrNo = document.createElement('div');
     yesOrNo.classList.add('yesOrNo');
