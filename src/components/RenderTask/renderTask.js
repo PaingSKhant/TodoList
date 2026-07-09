@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { deleteButton, editButton } from "../modal/modal.js";
 
 function formattedDate(dueDate) {
     return format(dueDate, "d MMM h:mm b");
@@ -11,8 +12,10 @@ export function renderTasks(tasksArray) {
     tasksContainer.innerHTML = ''; //wiped everything
     
     tasksArray.forEach(task => {
+
         const taskCard = document.createElement('div');
         taskCard.classList.add('taskCard');
+        
         tasksContainer.appendChild(taskCard);
 
         const top = document.createElement('div');
@@ -40,6 +43,15 @@ export function renderTasks(tasksArray) {
         priority.classList.add('priority');
         priority.textContent = task.priority;
 
+        const editAndDelete = document.createElement('div');
+        editAndDelete.classList.add('editDeleteTask');
+
+        const editBtn = editButton();
+        const deleteBtn = deleteButton();
+
+        editAndDelete.appendChild(editBtn);
+        editAndDelete.appendChild(deleteBtn);
+        taskCard.appendChild(editAndDelete);
         top.appendChild(title);
         top.appendChild(dueDate);
         bottom.appendChild(description);

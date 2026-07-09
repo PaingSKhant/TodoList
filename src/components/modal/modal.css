@@ -1,43 +1,61 @@
-/*actual Modal Display*/
+/* Full Viewport Backdrop Blur Layer */
 #modal {
-    color: white;
-    background-color: #1a1a1a;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    max-width: 90%;
-    
-    /* That small white border highlight */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    
-    /* Elevation shadow */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  color: white;
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  border: 2px solid #007bff; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 
-    position: fixed; 
-    
-    /* Sit on top of everything else */
-    top: 20%;
-    
-
-    border: 2px solid #007bff;
+  /* Precise Positioning over the screen center */
+  position: fixed; 
+  top: 50%;                 
+  left: 50%;                
+  transform: translate(-50%, -50%); 
+  z-index: 9999;            
 }
 
+/* The Magic Background Blur Trick */
+#modal::before {
+  content: "";
+  position: fixed;
+  
+  /* Stretches the blur fallback across the entire viewport */
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  
+  /* Dim background and blur effect */
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  /* Placed safely behind the modal content elements */
+  z-index: -1; 
+  pointer-events: none; /* Prevents the backdrop layer from blocking modal form clicks */
+}
 
-
+/* Interior Form Styling Elements */
 #modalHeader {
-    display: flex;
-    justify-content: space-between;
-    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Closes gaps and controls inner layout spacing properly */
 }
-#modalHeader h3{
-    margin: 0;
+
+#modalHeader h3 {
+  margin: 0;
 }
 
 span#fsubmit {
-    grid-column: 2;
-    
-    justify-self: end;
+  grid-column: 2;
+  justify-self: end;
 }
+
 .editModal, .deleteModal {
     background-color: #1e1e24; /* Matches your sidebar theme */
     color: #ffffff;
