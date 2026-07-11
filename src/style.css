@@ -125,7 +125,9 @@ form {
     font-weight: 500;
     font-family: system-ui, -apple-system, sans-serif; /* Clean modern font stack */
     
-    padding: 6px 12px;         /* Generous hit-box so it's easy to click */
+    box-sizing: border-box;
+    padding-left: 2%;
+    padding-right: 2%;         /* Generous hit-box so it's easy to click */
     cursor: pointer;
     user-select: none;         /* Prevents accidental text selection highlighting */
     

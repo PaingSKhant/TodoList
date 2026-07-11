@@ -132,3 +132,11 @@ export function deleteModalWindow(currentSelectedName) {
 
     return {yes, deleteWindow};
 }
+
+export function taskEditModal() {
+    const mainScreen = document.getElementById('mainScreen');
+    const editWindow = document.createElement('dialog');
+    editWindow.classList.add('taskEdit');
+
+    mainScreen.appendChild(editWindow);
+}

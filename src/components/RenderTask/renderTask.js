@@ -12,7 +12,7 @@ export function renderTasks(tasksArray) {
     
     tasksContainer.innerHTML = ''; //wiped everything
     
-    tasksArray.forEach(task => {
+    tasksArray.forEach((task,index) => {
 
         const taskCard = document.createElement('div');
         taskCard.classList.add('taskCard');
@@ -79,6 +79,14 @@ export function renderTasks(tasksArray) {
 
         const editBtn = editButton();
         const deleteBtn = deleteButton();
+        editBtn.classList.add('edit-task');
+        deleteBtn.classList.add('delete-task');
+
+        editBtn.dataset.editId = index;
+        deleteBtn.dataset.deleteId = index;
+
+        console.log(editBtn.dataset);
+        console.log(deleteBtn.dataset);
 
         top.appendChild(checkboxLabel); 
         top.appendChild(title);
@@ -91,9 +99,14 @@ export function renderTasks(tasksArray) {
         bottom.appendChild(description);
         bottom.appendChild(priority);
 
-        
+        return{
+            edit: editBtn,
+            delete: deleteBtn
+        }
 
     });
+}
 
-
+export function initTaskListeners() {
+    
 }

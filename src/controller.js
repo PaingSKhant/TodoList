@@ -76,7 +76,7 @@ function todoList(title,dueDate,description,priority) {
         dueDate,
         description,
         priority,
-        complete: true
+        complete: false
     };
 };
 
@@ -92,13 +92,6 @@ function Project(projectName) {
 function isNameAvailable(projectName, projectArray) {
     return !projectArray.some(project => project.projectName === projectName);
 }
-
-export function isComplete(complete) {
-    if(complete) {
-        
-    }
-}
-
 
 export function createProject() {
     const addProject = document.getElementById('addProject');
