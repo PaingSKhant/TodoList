@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { deleteButton, editButton } from "../modal/modal.js";
+import { setLocalStorage } from "../../controller.js";
 
 function formattedDate(dueDate) {
     return format(dueDate, "d MMM h:mm b");
@@ -33,7 +34,7 @@ export function renderTasks(tasksArray) {
 
         const dueDate = document.createElement('div');
         dueDate.classList.add('dueDate');
-        dueDate.textContent = formattedDate(task.dueDate);
+        dueDate.textContent = 'Due: ' + formattedDate(task.dueDate);
         
         const description = document.createElement('div');
         description.classList.add('description');
@@ -43,12 +44,45 @@ export function renderTasks(tasksArray) {
         priority.classList.add('priority');
         priority.textContent = task.priority;
 
+        if(priority.textContent === "Low") {
+            priority.style.backgroundColor = "#52a3ff";
+        }else if(priority.textContent === "Medium") {
+            priority.style.backgroundColor = "#ffb84d";
+        }else {
+            priority.style.backgroundColor = "#ff5c5c";
+        }
+        
+        const checkboxLabel = document.createElement('label');
+        checkboxLabel.classList.add('dot-container');
+        
+        const isComplete = document.createElement('input');
+        isComplete.type = 'checkbox';
+        isComplete.classList.add('dot-checkbox');
+        isComplete.checked = task.completed || false; 
+
+        isComplete.checked = task.complete;
+
+        isComplete.addEventListener('change', () => {
+        task.complete = isComplete.checked;
+        setLocalStorage();
+        });
+
+        const customDot = document.createElement('span');
+        customDot.classList.add('checkmark');
+
+        checkboxLabel.appendChild(isComplete);
+        checkboxLabel.appendChild(customDot);
+        
+
         const editAndDelete = document.createElement('div');
         editAndDelete.classList.add('editDeleteTask');
 
         const editBtn = editButton();
         const deleteBtn = deleteButton();
 
+        top.appendChild(checkboxLabel); 
+        top.appendChild(title);
+        top.appendChild(dueDate);
         editAndDelete.appendChild(editBtn);
         editAndDelete.appendChild(deleteBtn);
         taskCard.appendChild(editAndDelete);
@@ -56,6 +90,9 @@ export function renderTasks(tasksArray) {
         top.appendChild(dueDate);
         bottom.appendChild(description);
         bottom.appendChild(priority);
+
+        
+
     });
 
 

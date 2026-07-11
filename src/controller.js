@@ -76,7 +76,7 @@ function todoList(title,dueDate,description,priority) {
         dueDate,
         description,
         priority,
-        complete: false
+        complete: true
     };
 };
 
@@ -91,6 +91,12 @@ function Project(projectName) {
 
 function isNameAvailable(projectName, projectArray) {
     return !projectArray.some(project => project.projectName === projectName);
+}
+
+export function isComplete(complete) {
+    if(complete) {
+        
+    }
 }
 
 
@@ -211,6 +217,8 @@ export function updateProjectName(pjectName) {
                 console.log(getLocalStorage());
 
                 editWindow.close();
+
+                location.reload();
             }
             
         }
@@ -228,6 +236,7 @@ export function deleteProject(projectName) {
         console.log(getLocalStorage());
 
         deleteWindow.close();
+        location.reload();
 
     });
 }

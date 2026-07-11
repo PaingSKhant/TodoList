@@ -74,7 +74,7 @@
   padding: 4px 8px;
   border-radius: 6px;
   background-color: #2c3036; /* Slightly lighter gray for badge contrast */
-  color: #ced4da;
+  color: white;
   border: 1px solid #3c414a;
 }
 
@@ -116,8 +116,90 @@
   transform: scale(0.95);
 }
 
-/* Fix for Modal Overlapping */
 /* CHANGE THE CLASSES BELOW TO MATCH YOUR MODAL'S EXACT CLASS OR ID NAMES */
 .modal-overlay, .modal, #modalContainer, .task-modal { 
   z-index: 100 !important; /* Pushes modal elements safely over the cards */
+}
+
+#tasksContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+/* Align the dot container, title, and date in one row */
+.top {
+  display: flex;
+  flex-direction: row; /* Arranges dot and text side-by-side */
+  align-items: flex-start;
+  gap: 12px;
+  padding-right: 70px;
+}
+
+/* Group title and date together vertically inside the top flex container */
+.top h3, .top .dueDate {
+  margin: 0;
+}
+.top > div:not(.dot-container) {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Custom Checkbox Dot Styles */
+.dot-container {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 3px; /* Aligns dot perfectly with the first line of text */
+}
+
+/* Hide the native ugly browser checkbox */
+.dot-checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* The outer ring (Unchecked State) */
+.checkmark {
+  display: block;
+  height: 18px;
+  width: 18px;
+  border: 2px solid #6c757d; /* Muted gray border */
+  border-radius: 50%; /* Perfect circle */
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Outer ring transitions on card hover */
+.taskCard:hover .checkmark {
+  border-color: #adb5bd;
+}
+
+/* The inner solid filling dot (Hidden by default) */
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #52a3ff; /* Matches your "Low" priority blue accent */
+}
+
+/* Checked State Changes */
+.dot-checkbox:checked ~ .checkmark {
+  border-color: #52a3ff; /* Glows blue when checked */
+  transform: scale(1.05);
+}
+
+
+.dot-checkbox:checked ~ .checkmark::after {
+  display: block;
 }

@@ -39,8 +39,6 @@ export function initProjectListeners() {
 
             const projectNameElement = parentRow.querySelector('.projectName');
 
-            console.log(projectNameElement);
-
             const projectName = projectNameElement.textContent;
 
             deleteProject(projectName);
