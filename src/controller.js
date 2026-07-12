@@ -2,7 +2,7 @@ import { isToday, isTomorrow, parseISO, format } from "date-fns";
 
 import { renderTasks } from "./components/RenderTask/renderTask.js";
 import { displaySavedProjects } from "./components/RenderProject/renderProject.js";
-import { deleteModalWindow, editModalWindow } from "./components/modal/modal.js";
+import { deleteModalWindow, editModalWindow, taskEditModal } from "./components/modal/modal.js";
 
 
 //all projects are stored here
@@ -234,4 +234,31 @@ export function deleteProject(projectName) {
     });
 }
 
+export function updateTasks() {
+    const taskCard = document.getElementById('tasksContainer');
+
+    taskCard.addEventListener('click', e => {
+        if(e.target.classList.contains('editBtn')) {
+
+            const index = e.target.dataset.editId;
+
+            const title = getActiveProjectTasks()[index].title;
+            const description = getActiveProjectTasks()[index].description;
+
+            
+            console.log("Edit ID: " + index);
+
+            console.log(title);
+
+            taskEditModal(title,description);
+
+
+        }
+        if(e.target.classList.contains('deleteBtn')) {
+
+            console.log("Delete ID: " + e.target.dataset.deleteId);
+
+        }
+    });
+}
 ///test here!!!!!!!!!!!

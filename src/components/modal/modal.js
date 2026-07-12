@@ -61,13 +61,13 @@ export function editModalWindow(currentSelectedName, placeholderText) {
     editWindow.classList.add('editModal');
 
     const titleAndBtn = document.createElement('div');
-    titleAndBtn.id = 'titleAndClose';
+    titleAndBtn.classList.add('titleAndClose');
 
     const titleName = document.createElement('h4');
     titleName.textContent = currentSelectedName;
 
     const closeBtn = document.createElement('button');
-    closeBtn.id = 'closeBtn';
+    closeBtn.classList.add('closeBtn');
     closeBtn.innerHTML = '&times;';
 
     const editInput = document.createElement('input');
@@ -133,10 +133,72 @@ export function deleteModalWindow(currentSelectedName) {
     return {yes, deleteWindow};
 }
 
-export function taskEditModal() {
+function editInputWrapper(title,inputValue,placeholder) {
+    const rowWrapper = document.createElement('div');
+    rowWrapper.classList.add('task-row-wrapper');
+
+    const name = document.createElement('h5');
+    name.classList.add('editTaskTitle');
+    name.textContent = title;
+
+    const input = document.createElement('input');
+    input.classList.add('editInput');
+    input.value = inputValue;
+
+    rowWrapper.appendChild(name);
+    rowWrapper.appendChild(input);
+
+    return rowWrapper;
+}
+
+export function taskEditModal(taskName,description) {
     const mainScreen = document.getElementById('mainScreen');
     const editWindow = document.createElement('dialog');
-    editWindow.classList.add('taskEdit');
+    editWindow.classList.add('editModal');
+    editWindow.id = 'task-edit-modal';
 
+    const taskTitleAndClose = document.createElement('div');
+    taskTitleAndClose.classList.add('titleAndClose');
+
+    const closeBtn = document.createElement('button');
+    closeBtn.classList.add('closeBtn');
+    closeBtn.innerHTML = '&times;';
+
+    const title = document.createElement('h4');
+    title.classList.add('edit-task-title')
+    title.textContent = taskName;
+
+    editWindow.addEventListener('close', () => {
+        console.log('modal sucessfully removed from DOM');
+        editWindow.remove();
+    });
+
+    closeBtn.addEventListener('click', () => {
+        editWindow.close();
+    });
+
+    const taskNameInput = editInputWrapper('Name', taskName);
+    const taskDescriptionInput = editInputWrapper('Describe', description);
+    
+    const rowWrapper = document.createElement('div');
+    rowWrapper.classList.add('task-row-wrapper');
+
+    const dueDate = document.createElement('h5');
+    dueDate.textContent = "dueDate";
+    rowWrapper.appendChild(dueDate);
+
+    const date = document.createElement('input');
+    date.type = 'datetime-local';
+    rowWrapper.appendChild(date);
+
+    taskTitleAndClose.appendChild(title);
+    taskTitleAndClose.appendChild(closeBtn);
+    editWindow.appendChild(taskTitleAndClose);
+
+    editWindow.appendChild(taskNameInput);
+    editWindow.appendChild(taskDescriptionInput);
+    editWindow.appendChild(rowWrapper);
     mainScreen.appendChild(editWindow);
+
+    editWindow.showModal();
 }

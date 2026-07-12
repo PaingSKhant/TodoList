@@ -62,8 +62,7 @@ span#fsubmit {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     padding: 20px;
-    width: 15%;
-    height: 10%;
+    
 }
 
 /* Style the native dimming backdrop layer */
@@ -71,11 +70,11 @@ span#fsubmit {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-#closeBtn:hover {
+.closeBtn:hover {
     color: #61a7f1; 
 }
 
-#titleAndClose {
+.titleAndClose {
     display: flex;
     justify-content: space-between;
     margin-top: -8%;
@@ -102,4 +101,26 @@ span#fsubmit {
 .yesOrNo {
     display: flex;
     justify-content: space-between;
+}
+
+/* Make all icons inside your action buttons completely clickable-through */
+.editBtn svg, 
+.editBtn path,
+.deleteBtn svg,
+.deleteBtn path {
+    pointer-events: none;
+}
+
+.task-row-wrapper {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    justify-content: space-between;
+    height: 40px;
+    border: 2px solid red;
+}
+
+#task-edit-modal {
+    width: 18%;
+    
 }
