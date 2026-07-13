@@ -103,7 +103,7 @@ span#fsubmit {
     justify-content: space-between;
 }
 
-/* Make all icons inside your action buttons completely clickable-through */
+/* Make all icons inside buttons completely clickable-through */
 .editBtn svg, 
 .editBtn path,
 .deleteBtn svg,
@@ -117,7 +117,6 @@ span#fsubmit {
     width: 95%;
     justify-content: space-between;
     height: 40px;
-    border: 2px solid red;
 }
 
 #task-edit-modal {

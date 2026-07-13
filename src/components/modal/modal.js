@@ -99,7 +99,7 @@ export function editModalWindow(currentSelectedName, placeholderText) {
     };
 }
 
-export function deleteModalWindow(currentSelectedName) {
+export function deleteModalWindow() {
     const mainScreen = document.getElementById('mainScreen');
     const deleteWindow = document.createElement('dialog');
     deleteWindow.classList.add('deleteModal');
@@ -133,7 +133,7 @@ export function deleteModalWindow(currentSelectedName) {
 
     deleteWindow.showModal();
 
-    return {yes, deleteWindow};
+    return {yes, deleteWindow, title};
 }
 
 function editInputWrapper(title,inputValue,placeholder) {
@@ -172,7 +172,6 @@ export function taskEditModal(taskName,description,index) {
     title.textContent = taskName;
 
     editWindow.addEventListener('close', () => {
-        console.log('modal sucessfully removed from DOM');
         editWindow.remove();
     });
 
@@ -181,8 +180,10 @@ export function taskEditModal(taskName,description,index) {
     });
 
     const {rowWrapper: taskNameWrapper ,input: taskNameInput} = editInputWrapper('Name', taskName);
+    taskNameInput.required = true;
     const {rowWrapper: taskDescriptionWrapper,input: taskDescriptionInput} = editInputWrapper('Describe', description);
-    
+    taskDescriptionInput.required = true;
+
     const dateRowWrapper = document.createElement('div');
     dateRowWrapper.classList.add('task-row-wrapper');
 
@@ -192,6 +193,7 @@ export function taskEditModal(taskName,description,index) {
 
     const date = document.createElement('input');
     date.type = 'datetime-local';
+    date.required = true;
     dateRowWrapper.appendChild(date);
 
     const priorityRowWrapper = document.createElement('div');
@@ -218,6 +220,17 @@ export function taskEditModal(taskName,description,index) {
     submit.textContent = "Submit";
 
     submit.addEventListener('click', () => {
+
+        if(taskNameInput.value.trim() == "") {
+            alert("Please Enter the name");
+            taskNameInput.focus();
+            return;
+        }
+        if(date.value === "") {
+            alert("Please Enter the dueDate")
+            return;
+        }
+
         getActiveProjectTasks()[index].title = taskNameInput.value;
         getActiveProjectTasks()[index].description = taskDescriptionInput.value;
         getActiveProjectTasks()[index].priority = prioritySelect.value;

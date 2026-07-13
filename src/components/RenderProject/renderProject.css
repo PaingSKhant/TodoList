@@ -25,8 +25,6 @@
    2. Project Name Adjustments (Inside Wrapper)
    ========================================================================== */
 
-/* Your original .projectName styles remain intact for static items, 
-   but we neutralize padding/borders when nested inside our flex row to avoid layout breaking */
 .projectName {
     flex-shrink: 1;
     display: block;
@@ -94,9 +92,9 @@
     cursor: pointer;
     
     /* Box padding and spacing alignment inside the flex row */
-    padding: 4px 8px;    /* Kept your smaller sizing */
-    border-radius: 4px;  /* Softens box edges for a neat clickable region */
-    font-size: 0.85rem;  /* Shrinks the icon/text size */
+    padding: 4px 8px;    
+    border-radius: 4px;  
+    font-size: 0.85rem; 
     
     /* Slightly dimmer color initially so it doesn't pull focus from the text label */
     color: rgba(255, 255, 255, 0.4); 
@@ -107,7 +105,7 @@
     justify-content: center;
 }
 
-/* Apply the same style rules to your delete button if it uses a class like .deleteBtn */
+/* Apply the same style rules to delete button if it uses a class like .deleteBtn */
 .deleteBtn {
     background: transparent;
     border: none;

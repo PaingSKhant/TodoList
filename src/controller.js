@@ -54,10 +54,6 @@ export function getActiveProjectTasks() {
     return foundProject ? foundProject.task : [];
 }
 
-function editTask() {
-    
-}
-
 export function changeProjectName(currentProject, newProjectName) {
     for (let project of projects) {
         if(project.projectName === currentProject) {
@@ -68,9 +64,20 @@ export function changeProjectName(currentProject, newProjectName) {
     }
 }
 
-export function projectDeletion(projectName) {
+function projectDeletion(projectName) {
     projects = projects.filter(project => project.projectName !== projectName);
     setLocalStorage();
+}
+
+function taskDeletion(index) {
+
+    const tasks = getActiveProjectTasks();
+    
+    tasks.splice(index, 1);
+    
+    setLocalStorage();
+    
+    renderTasks(tasks);
 }
 
 
@@ -229,8 +236,6 @@ export function deleteProject(projectName) {
 
         projectDeletion(projectName);
         displaySavedProjects();
-        console.log(projects);
-        console.log(getLocalStorage());
 
         deleteWindow.close();
         location.reload();
@@ -247,24 +252,27 @@ export function updateTasks() {
             const index = e.target.dataset.editId;
             const title = getActiveProjectTasks()[index].title;
             const description = getActiveProjectTasks()[index].description;
-            
-            console.log("Edit ID: " + index);
-
-            console.log(title);
 
             const {submit, editWindow, taskNameInput} = taskEditModal(title,description,index);
-
-            submit.addEventListener('click', () => {
-
-                
-
-            });
 
 
         }
         if(e.target.classList.contains('deleteBtn')) {
 
-            console.log("Delete ID: " + e.target.dataset.deleteId);
+            const index = e.target.dataset.deleteId;
+
+            const {yes, deleteWindow, title} = deleteModalWindow();
+            title.textContent = "Delete task?"
+
+            yes.addEventListener('click', () =>{
+
+                taskDeletion(index);
+
+                setLocalStorage();
+
+                deleteWindow.close();
+
+            });
 
         }
     });
