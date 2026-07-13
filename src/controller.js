@@ -54,6 +54,10 @@ export function getActiveProjectTasks() {
     return foundProject ? foundProject.task : [];
 }
 
+function editTask() {
+    
+}
+
 export function changeProjectName(currentProject, newProjectName) {
     for (let project of projects) {
         if(project.projectName === currentProject) {
@@ -241,16 +245,20 @@ export function updateTasks() {
         if(e.target.classList.contains('editBtn')) {
 
             const index = e.target.dataset.editId;
-
             const title = getActiveProjectTasks()[index].title;
             const description = getActiveProjectTasks()[index].description;
-
             
             console.log("Edit ID: " + index);
 
             console.log(title);
 
-            taskEditModal(title,description);
+            const {submit, editWindow, taskNameInput} = taskEditModal(title,description,index);
+
+            submit.addEventListener('click', () => {
+
+                
+
+            });
 
 
         }

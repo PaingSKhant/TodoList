@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { deleteButton, editButton } from "../modal/modal.js";
 import { setLocalStorage } from "../../controller.js";
 
-function formattedDate(dueDate) {
+export function formattedDate(dueDate) {
     return format(dueDate, "d MMM h:mm b");
 }
 
@@ -84,8 +84,6 @@ export function renderTasks(tasksArray) {
         deleteBtn.dataset.deleteId = index;
 
         top.appendChild(checkboxLabel); 
-        top.appendChild(title);
-        top.appendChild(dueDate);
         editAndDelete.appendChild(editBtn);
         editAndDelete.appendChild(deleteBtn);
         taskCard.appendChild(editAndDelete);

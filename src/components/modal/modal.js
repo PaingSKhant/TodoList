@@ -1,4 +1,7 @@
-import { changeProjectName } from "../../controller.js";
+
+import { format } from "date-fns";
+import { changeProjectName, getActiveProjectTasks, setLocalStorage } from "../../controller.js";
+import { formattedDate, renderTasks } from "../RenderTask/renderTask.js";
 
 export function initModal() {
     
@@ -148,10 +151,10 @@ function editInputWrapper(title,inputValue,placeholder) {
     rowWrapper.appendChild(name);
     rowWrapper.appendChild(input);
 
-    return rowWrapper;
+    return {rowWrapper, input};
 }
 
-export function taskEditModal(taskName,description) {
+export function taskEditModal(taskName,description,index) {
     const mainScreen = document.getElementById('mainScreen');
     const editWindow = document.createElement('dialog');
     editWindow.classList.add('editModal');
@@ -177,28 +180,68 @@ export function taskEditModal(taskName,description) {
         editWindow.close();
     });
 
-    const taskNameInput = editInputWrapper('Name', taskName);
-    const taskDescriptionInput = editInputWrapper('Describe', description);
+    const {rowWrapper: taskNameWrapper ,input: taskNameInput} = editInputWrapper('Name', taskName);
+    const {rowWrapper: taskDescriptionWrapper,input: taskDescriptionInput} = editInputWrapper('Describe', description);
     
-    const rowWrapper = document.createElement('div');
-    rowWrapper.classList.add('task-row-wrapper');
+    const dateRowWrapper = document.createElement('div');
+    dateRowWrapper.classList.add('task-row-wrapper');
 
     const dueDate = document.createElement('h5');
     dueDate.textContent = "dueDate";
-    rowWrapper.appendChild(dueDate);
+    dateRowWrapper.appendChild(dueDate);
 
     const date = document.createElement('input');
     date.type = 'datetime-local';
-    rowWrapper.appendChild(date);
+    dateRowWrapper.appendChild(date);
+
+    const priorityRowWrapper = document.createElement('div');
+    priorityRowWrapper.classList.add('task-row-wrapper');
+
+    const priority = document.createElement('h5');
+    priority.textContent = "Priority";
+    priorityRowWrapper.appendChild(priority);
+
+    const prioritySelect = document.createElement('select');
+    const options = ['Low', 'Medium', 'High'];
+
+    options.forEach(text => {
+        const option = document.createElement('option');
+        option.value = text;
+        option.textContent = text;
+
+        prioritySelect.appendChild(option);
+    });
+    priorityRowWrapper.appendChild(prioritySelect);
+
+    const submit = document.createElement('button');
+    submit.classList.add('closeBtn');
+    submit.textContent = "Submit";
+
+    submit.addEventListener('click', () => {
+        getActiveProjectTasks()[index].title = taskNameInput.value;
+        getActiveProjectTasks()[index].description = taskDescriptionInput.value;
+        getActiveProjectTasks()[index].priority = prioritySelect.value;
+        getActiveProjectTasks()[index].dueDate = date.value;
+
+        setLocalStorage();
+
+        editWindow.close();
+
+        renderTasks(getActiveProjectTasks());
+    });
 
     taskTitleAndClose.appendChild(title);
     taskTitleAndClose.appendChild(closeBtn);
     editWindow.appendChild(taskTitleAndClose);
 
-    editWindow.appendChild(taskNameInput);
-    editWindow.appendChild(taskDescriptionInput);
-    editWindow.appendChild(rowWrapper);
+    editWindow.appendChild(taskNameWrapper);
+    editWindow.appendChild(taskDescriptionWrapper);
+    editWindow.appendChild(dateRowWrapper);
+    editWindow.appendChild(priorityRowWrapper);
+    editWindow.appendChild(submit);
     mainScreen.appendChild(editWindow);
 
     editWindow.showModal();
+
+    return{submit, editWindow, taskNameInput};
 }
